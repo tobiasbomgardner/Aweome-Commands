@@ -1,0 +1,8 @@
+{
+  "entity.awesome_commands.awesome_hammers": "Awesome Hammers",
+  "effect.awesome_commands.command_stun": "Command Stun",
+  "death.attack.awesome_hammers_obliteration": "%1$s was obliterated by %2$s's Awesome Hammers.",
+  "death.attack.awesome_hammers_obliteration.player": "%1$s was obliterated by %2$s's Awesome Hammers.",
+  "death.attack.awesome_hammers_obliteration.item": "%1$s was obliterated by %2$s's Awesome Hammers.",
+  "death.attack.awesome_hammers_obliteration.named_type": "%1$s (Type: %2$s) was obliterated by %3$s's Awesome Hammers."
+}
