@@ -69,6 +69,13 @@ public class ModEvents {
         updatePendingSpinRestore(livingEntity);
         updatePendingTargetRestore(livingEntity);
         normalizeCommandStunVisuals(livingEntity);
+
+        if (isCommandStunned(livingEntity) || isAscending(livingEntity)) {
+            applyCommandControlOverrides(livingEntity);
+        } else {
+            clearCommandControlOverrides(livingEntity);
+        }
+
         if (isCommandStunned(livingEntity)) {
             double y = livingEntity.getY();
             livingEntity.setDeltaMovement(0.0d, 0.0d, 0.0d);
@@ -200,6 +207,20 @@ public class ModEvents {
                 false
         );
         livingEntity.addEffect(hidden);
+    }
+
+    private static void applyCommandControlOverrides(LivingEntity livingEntity) {
+        livingEntity.setNoGravity(true);
+        if (livingEntity instanceof Mob mob) {
+            mob.setNoAi(true);
+        }
+    }
+
+    private static void clearCommandControlOverrides(LivingEntity livingEntity) {
+        livingEntity.setNoGravity(false);
+        if (livingEntity instanceof Mob mob) {
+            mob.setNoAi(false);
+        }
     }
 
     private static void updateSpinAroundTarget(LivingEntity livingEntity) {
@@ -384,6 +405,8 @@ public class ModEvents {
             livingEntity.removeEffect(ModEffects.COMMAND_STUN.get());
         }
 
+        clearCommandControlOverrides(livingEntity);
+
         persistentData.remove(ASCEND_TARGET_Y_KEY);
         persistentData.remove(ASCEND_SPEED_KEY);
         persistentData.remove(ASCEND_PENDING_HAMMER_KEY);
@@ -454,6 +477,8 @@ public class ModEvents {
                 player.sendSystemMessage(Component.literal("Awesome Exploded " + targetCount + " Entities."));
             }
         }
+
+        clearCommandControlOverrides(livingEntity);
 
         persistentData.remove(SPIN_RESTORE_TICK_KEY);
         persistentData.remove(SPIN_RESTORE_X_KEY);

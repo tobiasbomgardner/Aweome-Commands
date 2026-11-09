@@ -21,12 +21,15 @@ import net.tobias.awesome_commands.effects.ModEffects;
 import net.tobias.awesome_commands.entity.ModEntities;
 import net.tobias.awesome_commands.entity.entities.AwesomeHammers;
 import org.joml.Vector3f;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class AwesomeExplodeCmd {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AwesomeExplodeCmd.class);
     private static final String SPIN_TARGET_UUID_KEY = "awesome_commands_spin_target_uuid";
     private static final String SPIN_RADIUS_KEY = "awesome_commands_spin_radius";
     private static final String SPIN_CURRENT_ANGLE_KEY = "awesome_commands_spin_current_angle";
@@ -242,7 +245,6 @@ public class AwesomeExplodeCmd {
                 teleportEntity(executor, level, orbitX, topY, orbitZ);
                 executor.lookAt(EntityAnchorArgument.Anchor.EYES, target.getEyePosition());
             }
-
             return 1;
         }
         return 0;
